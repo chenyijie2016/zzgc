@@ -50,5 +50,14 @@ def reset_device_number():
 
 
 if __name__ == '__main__':
-    pass
+    print('''
+    [1]:set_default
+    [2]:reset_device_number
+    ''')
 
+    option = input("Input option:")
+    if option == '1':
+        set_default()
+
+    if option == '2':
+        reset_device_number()
