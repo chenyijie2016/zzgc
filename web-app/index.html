@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Devices States</title>
+    <script src="js/angular.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+</head>
+<body ng-app="MyApp" ng-controller="DevicesController">
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Remaining</th>
+            <th>Select</th>
+            <th>Subscribe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="device in devices"
+            ng-class="{success: (device.RemainingNumber !=0), warning: (device.RemainingNumber ==0)}">
+            <td>{{ device.Name }}</td>
+            <td>{{ device.Description }}</td>
+            <td>{{ device.RemainingNumber }}</td>
+            <td>
+                <button ng-click="Sub(device)">-</button>
+                <span class="" >{{device.SelectNumber}}</span>
+                <button ng-click="Plus(device)">+</button>
+
+            </td>
+
+            <td>
+                <button class="btn-success" ng-show="device.RemainingNumber != 0" ng-click="Subscribe(device.Name, device.SelectNumber)">
+                    <span>Subscribe</span>
+                </button>
+                <span ng-hide="device.RemainingNumber != 0" class="label label-danger">Inventory shortage</span>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <br>
+    <button class="btn" ng-click="refresh()">Refresh</button>
+</div>
+
+</body>
+
+<script src="js/constant.js"></script>
+<script src="js/app.js"></script>
+</html>
