@@ -21,7 +21,34 @@ def insert_admin():
     collection.insert_one({"username": "admin", "password": "admin", "email": "none", "authority": "admin"})
 
 
-if __name__ == '__main__':
+def set_default():
+    devices = [
+        {
+            "Name": "Device 1",
+            "Description": "Device 1 Description",
+            "RemainingNumber": 0
+        },
+        {
+            "Name": "Device 2",
+            "Description": "Device 2 Description",
+            "RemainingNumber": 0
+        },
+        {
+            "Name": "Device 3",
+            "Description": "Device 3 Description",
+            "RemainingNumber": 0
+        }
+    ]
+    for device in devices:
+        insert_device(device)
+
+
+def reset_device_number():
     devices = db.devices.find()
     for device in devices:
         update_device(device["Name"], random.randrange(0, 10))
+
+
+if __name__ == '__main__':
+    pass
+
