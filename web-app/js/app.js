@@ -19,7 +19,15 @@ angular.module('MyApp', []).controller('DevicesController', function ($scope, $h
 
             $http.post(API_URL + "/device/subscribe", {"DeviceName": name, "SubscribeNumber": number}).then
             (function (response) {
-                console.log(response);
+                console.log(response.data);
+                if(response.data["ret"] == 0)
+                {
+                    $scope.submit_success = true;
+                }
+                else
+                {
+                    $scope.submit_success = false;
+                }
             });
             //$scope.refresh();
         };

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Devices States</title>
     <script src="js/angular.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 </head>
@@ -27,13 +29,14 @@
             <td>{{ device.RemainingNumber }}</td>
             <td>
                 <button ng-click="Sub(device)">-</button>
-                <span class="" >{{device.SelectNumber}}</span>
+                <span class="">{{device.SelectNumber}}</span>
                 <button ng-click="Plus(device)">+</button>
 
             </td>
 
             <td>
-                <button class="btn-success" ng-show="device.RemainingNumber != 0" ng-click="Subscribe(device.Name, device.SelectNumber)">
+                <button class="btn-success" ng-show="device.RemainingNumber != 0"
+                        ng-click="Subscribe(device.Name, device.SelectNumber)">
                     <span>Subscribe</span>
                 </button>
                 <span ng-hide="device.RemainingNumber != 0" class="label label-danger">Inventory shortage</span>
@@ -45,6 +48,10 @@
 
     <br>
     <button class="btn" ng-click="refresh()">Refresh</button>
+    <div ng-show="submit_success" class="alert alert-success alert-dismissable">
+        <a href="#" class="alert-link" data-dismiss="alert"
+           aria-hidden="true"> Submit Success！</a>
+    </div>
 </div>
 
 </body>
