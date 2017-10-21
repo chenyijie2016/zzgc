@@ -9,21 +9,32 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 </head>
-<body ng-app="MyApp" ng-controller="DevicesController">
+<body ng-app="MainApp" ng-controller="DevicesController">
 <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">订购界面</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+            </ul>
+        </div>
+    </nav>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Remaining</th>
-            <th>Select</th>
-            <th>Subscribe</th>
+            <th>零件名称</th>
+            <th>零件说明</th>
+            <th>剩余数量</th>
+            <th>订购数量</th>
+            <th>订购</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="device in devices"
-            ng-class="{success: (device.RemainingNumber !=0), warning: (device.RemainingNumber ==0)}">
+            ng-class="{success: (device.RemainingNumber !=0), danger: (device.RemainingNumber ==0)}">
             <td>{{ device.Name }}</td>
             <td>{{ device.Description }}</td>
             <td>{{ device.RemainingNumber }}</td>
@@ -37,9 +48,9 @@
             <td>
                 <button class="btn-success" ng-show="device.RemainingNumber != 0"
                         ng-click="Subscribe(device.Name, device.SelectNumber)">
-                    <span>Subscribe</span>
+                    <span>立即订购</span>
                 </button>
-                <span ng-hide="device.RemainingNumber != 0" class="label label-danger">Inventory shortage</span>
+                <span ng-hide="device.RemainingNumber != 0" class="label label-danger">数量不足</span>
             </td>
         </tr>
         </tbody>
@@ -47,10 +58,22 @@
     </table>
 
     <br>
-    <button class="btn" ng-click="refresh()">Refresh</button>
-    <div ng-show="submit_success" class="alert alert-success alert-dismissable">
-        <a href="#" class="alert-link" data-dismiss="alert"
-           aria-hidden="true"> Submit Success！</a>
+    <button class="btn" ng-click="refresh()">刷新</button>
+    <div ng-repeat="_ret in ret track by $index">
+        <div ng-show="_ret.ret==0" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+            订购{{_ret.number}}件{{_ret.name}}成功！
+        </div>
+        <div ng-show="_ret.ret==400" class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+            订购失败,没有足够的库存
+        </div>
     </div>
 </div>
 

@@ -1,5 +1,6 @@
-angular.module('MyApp', []).controller('DevicesController', function ($scope, $http) {
+angular.module('MainApp', []).controller('DevicesController', function ($scope, $http) {
         $scope.devices = [];
+        $scope.ret = [];
         $scope.refresh = function () {
             $http({
                 method: 'GET',
@@ -16,18 +17,13 @@ angular.module('MyApp', []).controller('DevicesController', function ($scope, $h
         $scope.refresh();
 
         $scope.Subscribe = function (name, number) {
-
+            if (number === 0) {
+                return;
+            }
             $http.post(API_URL + "/device/subscribe", {"DeviceName": name, "SubscribeNumber": number}).then
             (function (response) {
                 console.log(response.data);
-                if(response.data["ret"] == 0)
-                {
-                    $scope.submit_success = true;
-                }
-                else
-                {
-                    $scope.submit_success = false;
-                }
+                $scope.ret.push({ret: response.data["ret"], name: name, number: number});
             });
             //$scope.refresh();
         };

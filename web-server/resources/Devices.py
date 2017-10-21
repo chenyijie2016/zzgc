@@ -26,5 +26,5 @@ class Devices(restful.Resource):
             print(0)
             return {"ret": 0}, 200, POST_HEADERS
         else:
-            print(401)
+            print(400)
             return {"ret": 400, "message": "No enough devices"}, 200, POST_HEADERS

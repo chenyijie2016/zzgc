@@ -57,7 +57,9 @@ if __name__ == '__main__':
 
     option = input("Input option:")
     if option == '1':
+        print('set_default')
         set_default()
 
     if option == '2':
+        print('reset_device_number')
         reset_device_number()
