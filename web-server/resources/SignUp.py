@@ -11,6 +11,9 @@ from werkzeug.security import generate_password_hash
 
 
 class SignUp(restful.Resource):
+    def options(self):
+        return {}, 200, POST_HEADERS
+
     def post(self):
         db = current_app.config["database"]  # database name: zzgc
         collection = db.user  # collection name: user

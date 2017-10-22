@@ -13,6 +13,7 @@ db = client.zzgc  # database name: zzgc
 app = Flask(__name__)
 
 app.config["database"] = db
+app.config['SECRET_KEY'] = 'agdvvs51v5f6d1v3'
 api = flask_restful.Api(app)
 
 api.add_resource(SignIn, '/user/signin')

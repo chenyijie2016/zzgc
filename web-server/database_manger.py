@@ -53,6 +53,7 @@ if __name__ == '__main__':
     print('''
     [1]:set_default
     [2]:reset_device_number
+    [3]:insert admin
     ''')
 
     option = input("Input option:")
@@ -63,3 +64,7 @@ if __name__ == '__main__':
     if option == '2':
         print('reset_device_number')
         reset_device_number()
+
+    if option == '3':
+        print('insert admin')
+        insert_admin()

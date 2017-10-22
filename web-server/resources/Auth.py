@@ -31,4 +31,4 @@ def verify_token(token):
 
 def generate_auth_token(username, expires=3600):
     s = Serializer(current_app.config['SECRET_KEY'], expires_in=expires)
-    return s.dumps({'username': username})
+    return s.dumps({'username': username}).decode('utf-8')

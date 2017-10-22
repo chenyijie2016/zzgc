@@ -5,11 +5,14 @@
 
 import flask_restful as restful
 from flask_restful import reqparse
-from common.util import POST_HEADERS
+from common.util import *
 from Auth import generate_auth_token, verify_username_and_password, verify_token
 
 
 class SignIn(restful.Resource):
+    def options(self):
+        return {}, 200, POST_HEADERS
+
     def post(self):
         parse = reqparse.RequestParser()
         parse.add_argument('username', type=str)
@@ -26,6 +29,7 @@ class SignIn(restful.Resource):
             else:
                 return {"ret": 403, "msg": "BAD TOKEN"}, 200, POST_HEADERS
         else:
+            print([args["username"], args["password"]])
             if verify_username_and_password(args["username"], args["password"]):
                 return {"ret": 0, "msg": "SIGNIN ACCEPTED",
                         "token": generate_auth_token(username=args["username"])}, 200, POST_HEADERS
