@@ -5,3 +5,7 @@ GET_HEADERS = {'Access-Control-Allow-Origin': '*',
 POST_HEADERS = {'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'POST',
                 'Access-Control-Allow-Headers': 'x-requested-with,content-type'}
+
+HEADERS = {'Access-Control-Allow-Origin': '*',
+           'Access-Control-Allow-Methods': '*',
+           'Access-Control-Allow-Headers': 'x-requested-with,content-type'}

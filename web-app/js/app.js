@@ -21,10 +21,12 @@ angular.module('MainApp', []).controller('DevicesController', function ($scope, 
                 return;
             }
             $http.post(API_URL + "/device/subscribe", {"DeviceName": name, "SubscribeNumber": number}).then
-            (function (response) {
-                console.log(response.data);
-                $scope.ret.push({ret: response.data["ret"], name: name, number: number});
-            });
+            (
+                function (response) {
+                    console.log(response.data);
+                    $scope.ret.push({ret: response.data["ret"], name: name, number: number});
+                }
+            );
             //$scope.refresh();
         };
 
@@ -40,7 +42,15 @@ angular.module('MainApp', []).controller('DevicesController', function ($scope, 
                 var index = $scope.devices.indexOf(device);
                 $scope.devices[index]["SelectNumber"] += 1;
             }
-
         };
+
+        $.getJSON("https://api.ip.sb/geoip",
+            function (json) {
+                $http.post(API_URL + '/record', json);
+            }
+        );
+        // $http.get("https://api.ip.sb/jsonip").then(function (response) {
+        //     $http.post(API_URL + '/record', response.data);
+        // })
     }
 );
