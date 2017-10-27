@@ -29,9 +29,9 @@ class SignIn(restful.Resource):
             else:
                 return {"ret": 403, "msg": "BAD TOKEN"}, 200, POST_HEADERS
         else:
-            print([args["username"], args["password"]])
+            # print([args["username"], args["password"]])
             if verify_username_and_password(args["username"], args["password"]):
                 return {"ret": 0, "msg": "SIGNIN ACCEPTED",
-                        "token": generate_auth_token(username=args["username"])}, 200, POST_HEADERS
+                        "token": generate_auth_token(username=args["username"], expires=86400)}, 200, POST_HEADERS
             else:
                 return {"ret": 403, "msg": "SIGNIN FAILED"}, 200, POST_HEADERS

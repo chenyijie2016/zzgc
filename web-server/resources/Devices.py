@@ -21,8 +21,9 @@ class Devices(restful.Resource):
             return {"ret": 404, "message": "No such device"}, 200, POST_HEADERS
 
         if current_device["RemainingNumber"] >= args["SubscribeNumber"]:
-            db.devices.update_one({"Name": args["DeviceName"]}, {
-                "$set": {"RemainingNumber": current_device["RemainingNumber"] - args["SubscribeNumber"]}})
+            db.devices.update_one(
+                {"Name": args["DeviceName"]},
+                {"$set": {"RemainingNumber": current_device["RemainingNumber"] - args["SubscribeNumber"]}})
             # print(0)
             return {"ret": 0}, 200, POST_HEADERS
         else:

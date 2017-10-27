@@ -10,11 +10,17 @@ from resources.Record import Record
 
 client = MongoClient()
 db = client.zzgc  # database name: zzgc
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 app.config["database"] = db
 app.config['SECRET_KEY'] = 'agdvvs51v5f6d1v3'
 api = flask_restful.Api(app)
+
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
 
 api.add_resource(SignIn, '/user/signin')
 api.add_resource(SignUp, '/user/signup')

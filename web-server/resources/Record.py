@@ -23,7 +23,7 @@ class Record(flask_restful.Resource):
 
     def get(self, type):
         parse = reqparse.RequestParser()
-        parse.add_argument('token', type=str)
+        parse.add_argument('token', type=str, required=True)
         args = parse.parse_args()
         if not Auth.verify_authority(args['token']):
             return {}, 403, GET_HEADERS
