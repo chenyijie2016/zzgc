@@ -29,4 +29,6 @@ api.add_resource(Devices, '/device/subscribe')
 api.add_resource(Record, '/record/<type>')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True
+            # , ssl_context=('./1_chenyijie.me_bundle.crt', './2_chenyijie.me.key')
+            )

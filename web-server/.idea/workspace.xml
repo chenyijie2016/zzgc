@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b98b58-22e3-4877-98bb-8e8eee9b235f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Order.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/sign.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/constant.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/order.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/record.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/signin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/signup.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web-app/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../web-app/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web-app/index.html" afterPath="$PROJECT_DIR$/../web-app/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web-app/js/app.js" afterPath="$PROJECT_DIR$/../web-app/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web-app/order.html" afterPath="$PROJECT_DIR$/../web-app/order.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Devices.py" afterPath="$PROJECT_DIR$/resources/Devices.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Record.py" afterPath="$PROJECT_DIR$/resources/Record.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/SignIn.py" afterPath="$PROJECT_DIR$/resources/SignIn.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/constant.js" afterPath="$PROJECT_DIR$/static/js/constant.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,11 +24,21 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constant.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/constant.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,6 +135,7 @@
         <option value="$PROJECT_DIR$/resources/Record.py" />
         <option value="$PROJECT_DIR$/resources/SignIn.py" />
         <option value="$PROJECT_DIR$/resources/Order.py" />
+        <option value="$PROJECT_DIR$/static/js/constant.js" />
         <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
@@ -490,14 +485,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="55" lean-forward="false" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database_manger.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -942,10 +929,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/constant.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
