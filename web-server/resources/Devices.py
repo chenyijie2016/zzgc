@@ -17,14 +17,14 @@ class Devices(restful.Resource):
         db = current_app.config["database"]
         current_device = db.devices.find_one({"Name": args["DeviceName"]})
         if not current_device:
-            print(404)
+            # print(404)
             return {"ret": 404, "message": "No such device"}, 200, POST_HEADERS
 
         if current_device["RemainingNumber"] >= args["SubscribeNumber"]:
             db.devices.update_one({"Name": args["DeviceName"]}, {
                 "$set": {"RemainingNumber": current_device["RemainingNumber"] - args["SubscribeNumber"]}})
-            print(0)
+            # print(0)
             return {"ret": 0}, 200, POST_HEADERS
         else:
-            print(400)
+            # print(400)
             return {"ret": 400, "message": "No enough devices"}, 200, POST_HEADERS

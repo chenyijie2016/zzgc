@@ -18,7 +18,7 @@ def update_device(name, number):
 
 def insert_admin():
     collection = db.user
-    collection.insert_one({"username": "admin", "password": "admin", "email": "none", "authority": "admin"})
+    collection.insert_one({"username": "super", "password": "pbkdf2:sha256:50000$jfmoS8be$cf3123b6e28aae3e83fcfc070233c984c90c2d4a25fb7be2b6841b874c928fb1", "email": "none", "authority": "admin"})
 
 
 def set_default():

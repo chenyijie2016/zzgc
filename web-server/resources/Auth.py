@@ -32,3 +32,15 @@ def verify_token(token):
 def generate_auth_token(username, expires=3600):
     s = Serializer(current_app.config['SECRET_KEY'], expires_in=expires)
     return s.dumps({'username': username}).decode('utf-8')
+
+
+def verify_authority(token, identity='admin'):
+    username = verify_token(token)
+    db = current_app.config["database"]
+    if username:
+        user = db.user.find_one({"username": str(username, encoding='utf-8')})
+        if user:
+            return user["authority"] == identity
+        else:
+            return False
+    return False

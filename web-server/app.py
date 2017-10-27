@@ -20,7 +20,7 @@ api.add_resource(SignIn, '/user/signin')
 api.add_resource(SignUp, '/user/signup')
 api.add_resource(States, '/states')
 api.add_resource(Devices, '/device/subscribe')
-api.add_resource(Record, '/record')
+api.add_resource(Record, '/record/<type>')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -1,4 +1,4 @@
-var app = angular.module('MainApp', []);
+var app = angular.module('MainApp', ["ngCookies"]);
 
 app.factory('locals', ['$window', function ($window) {
     return {        //存储单个属性
@@ -19,13 +19,25 @@ app.factory('locals', ['$window', function ($window) {
 }]);
 
 
-app.controller('DevicesController', function ($scope, $http, locals) {
+app.controller('DevicesController', function ($scope, $http, $cookieStore) {
+        //可以订购的零件信息
         $scope.devices = [];
-        $scope.ret = [];
+        //订单提示信息
+        $scope.messages = [];
+        //如果检测到已经登录，直接使用用户信息
+        if ($cookieStore.get('user')) {
+            //用户是否登录
+            $scope.login = true;
+            $scope.username = $cookieStore.get('user').username;
+        }
+        else {
+            $scope.login = false;
+        }
+        //刷新零件信息
         $scope.refresh = function () {
             $http({
                 method: 'GET',
-                url: API_URL + "/states",
+                url: API_URL + "/states"
 
             }).then(function SuccessfulCallBack(response) {
                 $scope.devices = response.data;
@@ -35,22 +47,29 @@ app.controller('DevicesController', function ($scope, $http, locals) {
             });
         };
 
-        $scope.refresh();
-
+        //订购
         $scope.Subscribe = function (name, number) {
             if (number === 0) {
                 return;
             }
-            $http.post(API_URL + "/device/subscribe", {"DeviceName": name, "SubscribeNumber": number}).then
+            if (!$cookieStore.get('user')) {
+                alert('请先登录后再进行操作!');
+                return;
+            }
+            $http.post(API_URL + "/device/subscribe", {
+                "DeviceName": name,
+                "SubscribeNumber": number,
+                'token': $cookieStore.get('token')
+            }).then
             (
                 function (response) {
                     console.log(response.data);
-                    $scope.ret.push({ret: response.data["ret"], name: name, number: number});
+                    $scope.messages.push({ret: response.data.ret, name: name, number: number});
                 }
             );
             //$scope.refresh();
         };
-
+        //减少订购数量
         $scope.Sub = function (device) {
             if (device["SelectNumber"] > 0) {
                 var index = $scope.devices.indexOf(device);
@@ -58,46 +77,72 @@ app.controller('DevicesController', function ($scope, $http, locals) {
             }
 
         };
+        //增加订购数量
         $scope.Plus = function (device) {
             if (device["SelectNumber"] < device["RemainingNumber"]) {
                 var index = $scope.devices.indexOf(device);
                 $scope.devices[index]["SelectNumber"] += 1;
             }
         };
-        if (!locals.get('access')) {
-            locals.set('access', true);
-            $.getJSON("https://api.ip.sb/geoip",
-                function (json) {
-                    $http.post(API_URL + '/record', json);
-                }
-            );
-        }
-        // $http.get("https://api.ip.sb/jsonip").then(function (response) {
-        //     $http.post(API_URL + '/record', response.data);
-        // })
+        // if (!$cookieStore.get('access')) {
+        //     $cookieStore.put('access', true);
+        //     $http.get("https://api.ip.sb/geoip").then(function (response) {
+        //         $http.post(API_URL + '/record', response.data);
+        //     });
+        // }
+        // else {
+        //     $http.get("https://api.ip.sb/geoip").then(function (response) {
+        //         $http.post(API_URL + '/record', response.data);
+        //     })
+        // }
+        // if (!$cookies.get('access')) {
+        //     $cookies.put('access', true);
+        //     $.getJSON("https://api.ip.sb/geoip",
+        //         function (json) {
+        //             $http.post(API_URL + '/record', json);
+        //         }
+        //     );
+        // }
+        //第一次打开页面，直接刷新零件信息
+        $scope.refresh();
+        //统计访问者信息
+        $http.get("https://api.ip.sb/geoip").then(function (response) {
+            $http.post(API_URL + '/record/ip', response.data);
+        })
     }
 );
 
 
-app.controller('RecordController', function ($scope, $http) {
+app.controller('RecordController', function ($scope, $http, $cookieStore) {
     $scope.ips = [];
+    var token = $cookieStore.get('token');
+    if (!token) {
+        alert('你没有访问此页面的权限');
+        return;
+    }
     getips = function () {
-        $http.get(API_URL + '/record').then(function (response) {
-            $scope.ips = response.data;
-        })
+        $http.get(API_URL + '/record/ip' + '?token=' + token).then(function (response) {
+                $scope.ips = response.data;
+            }, function () {
+                alert('你的用户权限不足')
+            }
+        )
     };
-
     getips();
 
 });
 
-app.controller('SignInController', function ($scope, $http, locals) {
 
-    if (locals.get('username') && locals.get('password')) {
-        $scope.username = locals.get('username');
-        $scope.password = locals.get('password');
-        $scope.keep = locals.get('keep');
+app.controller('SignInController', function ($scope, $http, $cookieStore) {
+
+    if ($cookieStore.get('user')) {
+        var user = $cookieStore.get('user');
+        $scope.username = user.username;
+        $scope.keep = user.keep;
+        if (user.keep)
+            $scope.password = user.password;
     }
+
 
     $scope.signin = function () {
         $http.post(API_URL + '/user/signin',
@@ -108,11 +153,19 @@ app.controller('SignInController', function ($scope, $http, locals) {
             console.log(response.data);
             if (response.data.ret === 0) {
                 if ($scope.keep) {
-                    locals.set('username', $scope.username);
-                    locals.set('password', $scope.password);
-                    locals.set('keep', $scope.keep);
+                    $cookieStore.put('user',
+                        {
+                            username: $scope.username,
+                            password: $scope.password,
+                            keep: $scope.keep
+                        }
+                    );
                 }
-                locals.set('token', response.data.token);
+                $cookieStore.put('token', response.data.token);
+                window.location = './index.html';
+            }
+            else {
+                alert('登录失败,请检查用户名和密码');
             }
         })
     }
@@ -141,6 +194,10 @@ app.controller('SignUpController', function ($scope, $http) {
             alert('请填写完整')
         }
     }
+
+});
+
+app.controller('OrderController', function ($scope, $http) {
 
 
 });
