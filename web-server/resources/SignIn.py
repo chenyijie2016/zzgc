@@ -6,11 +6,10 @@
 import flask_restful as restful
 from flask_restful import reqparse
 from common.util import *
-from Auth import generate_auth_token, verify_username_and_password, verify_token
-
+from resources.Auth import *
 
 class SignIn(restful.Resource):
-    def options(self):
+    def options():
         return {}, 200, POST_HEADERS
 
     def post(self):

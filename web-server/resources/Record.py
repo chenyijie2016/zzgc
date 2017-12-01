@@ -3,7 +3,7 @@ from flask_restful import reqparse
 from common.util import *
 from flask import current_app
 import datetime
-import Auth
+from resources.Auth import *
 
 
 class Record(flask_restful.Resource):
