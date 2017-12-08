@@ -1,1 +1,1 @@
-var API_URL = ".";
+var API_URL = "http://localhost:5000";

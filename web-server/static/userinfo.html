@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular-cookies.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/constant.js"></script>
+    <script src="js/app.js"></script>
+
+    <title>UserInfo</title>
+</head>
+<body ng-app="MainApp" ng-controller="UserController">
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">用户界面</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" ng-hide="login">
+                <li><a href="signup.html" target="_blank"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+                <li><a href="signin.html" target="_blank"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-show="login">
+                <li><a href="index.html"><span class="glyphicon glyphicon-user"></span>返回首页</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span> 订单查询</a></li>
+            </ul>
+        </div>
+    </nav>
+    <table class="table table-striped">
+        <tr>
+            <td>用户名</td>
+            <td>{{username}}</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{emailadd}}</td>
+        </tr>
+        <tr>
+            <td>余额</td>
+            <td>{{money}}&nbsp;&nbsp;&nbsp;<button class="btn">￥充值￥</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                权限
+            </td>
+            <td>
+                {{auth}}
+            </td>
+        </tr>
+    </table>
+    <p class="text-center">订单管理</p>
+    <table class="table table-striped">
+        <thread>
+            <tr>
+                <td>订单编号</td>
+                <td>订单日期</td>
+                <td>物品</td>
+                <td>数量</td>
+                <td>订单状态</td>
+                <td>订单操作</td>
+            </tr>
+        </thread>
+        <tbody>
+        <tr ng-repeat="order in orders">
+            <td>
+                {{order.id}}
+            </td>
+            <td>
+                {{order.date}}
+            </td>
+            <td>
+                {{order.device_name}}
+            </td>
+            <td>
+                {{order.number}}
+            </td>
+            <td>
+                <span class="label label-success" ng-show="!order.status">未取货</span>
+                <span class="label label-info" ng-show="order.status" >已取货</span>
+            </td>
+            <td>
+                <button ng-show="order.status" class="btn btn-danger">删除记录</button>
+                <button ng-show="!order.status" class="btn btn-success">取货</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+
+</html>

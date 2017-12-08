@@ -24,8 +24,8 @@
                 <li><a href="signin.html" target="_blank"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="login">
-                <li><a href="#" ><span class="glyphicon glyphicon-user"></span>{{username}} 用户中心</a></li>
-                <li><a href="#" ><span class="glyphicon glyphicon-search"></span> 订单查询</a></li>
+                <li><a href="userinfo.html"><span class="glyphicon glyphicon-user"></span>{{username}} 用户中心</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span> 订单查询</a></li>
             </ul>
         </div>
     </nav>
@@ -34,6 +34,7 @@
         <tr>
             <th>零件名称</th>
             <th>零件说明</th>
+            <th>图片</th>
             <th>剩余数量</th>
             <th>订购数量</th>
             <th>订购</th>
@@ -44,10 +45,15 @@
             ng-class="{success: (device.RemainingNumber !=0), danger: (device.RemainingNumber ==0)}">
             <td>{{ device.Name }}</td>
             <td>{{ device.Description }}</td>
+            <td>
+                <img src="image/{{device.Name}}.jpeg" height="150px" width="200px">
+            </td>
             <td>{{ device.RemainingNumber }}</td>
             <td>
                 <button ng-click="Sub(device)">-</button>
-                <span class="">{{device.SelectNumber}}</span>
+                <div class="col-xs-5">
+                    <input type="number" ng-model="device.SelectNumber" class="form-control">
+                </div>
                 <button ng-click="Plus(device)">+</button>
 
             </td>
@@ -67,7 +73,7 @@
     <br>
     <button class="btn" ng-click="refresh()">刷新</button>
     <br>
-    <a href="record.html" ><span class="glyphicon glyphicon-stats text-center">后台统计数据</span> </a>
+    <a href="record.html"><span class="glyphicon glyphicon-stats text-center">后台统计数据</span> </a>
 
     <div ng-repeat="msg in messages track by $index">
         <div ng-show="msg.ret===0" class="alert alert-success alert-dismissable">

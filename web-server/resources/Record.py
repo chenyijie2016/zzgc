@@ -3,7 +3,7 @@ from flask_restful import reqparse
 from common.util import *
 from flask import current_app
 import datetime
-from resources.Auth import *
+from .Auth import verify_authority
 
 
 class Record(flask_restful.Resource):
@@ -25,7 +25,7 @@ class Record(flask_restful.Resource):
         parse = reqparse.RequestParser()
         parse.add_argument('token', type=str, required=True)
         args = parse.parse_args()
-        if not Auth.verify_authority(args['token']):
+        if not verify_authority(args['token']):
             return {}, 403, GET_HEADERS
         data = []
 

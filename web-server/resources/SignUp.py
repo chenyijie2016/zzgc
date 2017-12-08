@@ -5,7 +5,7 @@
 
 import flask_restful as restful
 from flask_restful import reqparse
-from common.util import POST_HEADERS
+from common.util import POST_HEADERS,User
 from flask import current_app
 from werkzeug.security import generate_password_hash
 
@@ -32,7 +32,13 @@ class SignUp(restful.Resource):
         if query is not None:
             return {"ret": 400, "msg": "username already exists"}, 200, POST_HEADERS
 
-        collection.insert_one({"username": args["username"], "password": generate_password_hash(args["password"]),
-                               "email": args["email"], "authority": "user"})
+        newuser = User.copy()
+
+        newuser['username']=args["username"]
+        newuser['password']=generate_password_hash(args["password"])
+        newuser['email']=args["email"]
+        newuser['authority'] = 'user'
+
+        collection.insert_one(newuser)
 
         return {"ret": 0, "msg": "create a new user"}, 200, POST_HEADERS

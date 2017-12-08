@@ -24,18 +24,18 @@ def insert_admin():
 def set_default():
     devices = [
         {
-            "Name": "Device 1",
-            "Description": "Device 1 Description",
+            "Name": "1",
+            "Description": "Description",
             "RemainingNumber": 0
         },
         {
-            "Name": "Device 2",
-            "Description": "Device 2 Description",
+            "Name": "2",
+            "Description": "Description",
             "RemainingNumber": 0
         },
         {
-            "Name": "Device 3",
-            "Description": "Device 3 Description",
+            "Name": "3",
+            "Description": "Description",
             "RemainingNumber": 0
         }
     ]

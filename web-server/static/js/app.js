@@ -190,7 +190,14 @@ app.controller('SignUpController', function ($scope, $http) {
                         "email": $scope.emailadd
                     }).then(
                     function (response) {
-                        console.log(response.data)
+                        console.log(response.data);
+                        if (response.data.ret === 0) {
+                            alert('注册成功');
+                            window.location.href = '/signin.html';
+                        } else {
+                            alert('未知错误')
+                        }
+
                     }
                 )
             }
@@ -205,7 +212,36 @@ app.controller('SignUpController', function ($scope, $http) {
 
 });
 
-app.controller('OrderController', function ($scope, $http) {
+// app.controller('OrderController', function ($scope, $http) {
+//
+//
+// });
+
+app.controller('UserController', function ($scope, $http, $cookieStore) {
+    if ($cookieStore.get('user')) {
+        //用户是否登录
+        $scope.login = true;
+        $scope.username = $cookieStore.get('user').username;
+    }
+    $http.get(API_URL + '/user/info/' + $scope.username).then(function (response) {
+        console.log(response.data);
+        if (!response.data.money) {
+            $scope.money = 0;
+        }
+        else {
+            $scope.money = response.data.money;
+        }
+        $scope.emailadd = response.data.email;
+
+        if (response.data.authority === 'user') {
+            $scope.auth = '普通用户';
+        }
+        else {
+            $scope.auth = '管理员';
+        }
+
+        $scope.orders = response.data.orders;
+    })
 
 
 });

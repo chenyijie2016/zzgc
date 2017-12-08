@@ -9,7 +9,7 @@ from common.util import *
 from resources.Auth import *
 
 class SignIn(restful.Resource):
-    def options():
+    def options(self):
         return {}, 200, POST_HEADERS
 
     def post(self):
